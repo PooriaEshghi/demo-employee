@@ -1,9 +1,10 @@
 package com.pooriaeshghi.cruddemo.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.pooriaeshghi.cruddemo.dao.EmployeeDAO;
 import com.pooriaeshghi.cruddemo.entity.Employee;
+import com.pooriaeshghi.cruddemo.service.EmployeeService;
 
 import java.util.List;
 
@@ -13,15 +14,16 @@ import java.util.List;
 @RequestMapping("/api")
 public class EmployeeRestController {
 
-    private EmployeeDAO employeeDAO;
+    private EmployeeService employeeService;
 
-    public EmployeeRestController(EmployeeDAO theEmployeeDAO) {
-        employeeDAO = theEmployeeDAO;
+    @Autowired
+    public EmployeeRestController(EmployeeService theEmployeeService) {
+        employeeService = theEmployeeService;
     }
 
     @GetMapping("/employees")
     public List<Employee> getAllEmployee() {
-        return employeeDAO.findAll();
+        return employeeService.findAll();
     }
     
 
